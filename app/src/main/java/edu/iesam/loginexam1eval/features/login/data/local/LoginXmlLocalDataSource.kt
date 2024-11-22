@@ -1,7 +1,8 @@
-package edu.iesam.loginexam1eval
+package edu.iesam.loginexam1eval.features.login.data.local
 
 import android.content.Context
 import com.google.gson.Gson
+import edu.iesam.loginexam1eval.features.login.domain.User
 
 class LoginXmlLocalDataSource (private val context: Context) {
 
@@ -39,6 +40,10 @@ class LoginXmlLocalDataSource (private val context: Context) {
         return sharedPref.getString(userId, null)?.let { movie ->
             gson.fromJson(movie, User::class.java)
         }
+    }
+
+    fun findByName(userName: String): User?{
+        return this.findAll().find { it.name == userName }
     }
 
     fun delete() {
